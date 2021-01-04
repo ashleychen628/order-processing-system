@@ -27,7 +27,7 @@ This service is developed to add new customers and also provides and API like '/
 
     API's:
     
-     /createNewCustomer -> POST api to create new customer. Customer request consists of customer details, payment details and billing details. Sample json data in /data/CreateNewCustomer.txt
+     **/createNewCustomer** -> POST api to create new customer. Customer request consists of customer details, payment details and billing details. Sample json data in /data/CreateNewCustomer.txt
      
      /getCustomer/{customerId} -> GET api to get customer details.
      
