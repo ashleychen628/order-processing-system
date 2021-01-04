@@ -17,12 +17,6 @@ import java.util.UUID;
 @Table(name = "order_item")
 public class OrderItem {
     @Id
-//    @GeneratedValue(generator = "item_id_generator")
-//    @SequenceGenerator(
-//            name = "item_id_generator",
-//            sequenceName = "item_id_sequence",
-//            initialValue = 10
-//    )
     @Column(name = "item_id")
     private String itemId;
 

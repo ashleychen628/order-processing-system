@@ -31,12 +31,6 @@ import java.util.UUID;
 )
 public class Shipping {
     @Id
-//    @GeneratedValue(generator = "shipping_id_generator")
-//    @SequenceGenerator(
-//            name = "shipping_id_generator",
-//            sequenceName = "shipping_id_sequence",
-//            initialValue = 10
-//    )
     @Column(name = "shipping_id")
     private String shippingId;
 
@@ -44,26 +38,6 @@ public class Shipping {
     @Column(columnDefinition = "shipping_method_info")
     @Type(type = "pgsql_shipping_enum")
     private ShippingMethod shippingMethod;
-
-    public Shipping() {
-        this.shippingId = UUID.randomUUID().toString();
-    }
-
-    public ShippingMethod getShippingMethod() {
-        return shippingMethod;
-    }
-
-    public void setShippingMethod(ShippingMethod shippingMethod) {
-        this.shippingMethod = shippingMethod;
-    }
-
-    public ShippingStatus getShippingStatus() {
-        return shippingStatus;
-    }
-
-    public void setShippingStatus(ShippingStatus shippingStatus) {
-        this.shippingStatus = shippingStatus;
-    }
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "shipping_status_info")
@@ -101,6 +75,25 @@ public class Shipping {
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+    public Shipping() {
+        this.shippingId = UUID.randomUUID().toString();
+    }
+
+    public ShippingMethod getShippingMethod() {
+        return shippingMethod;
+    }
+
+    public void setShippingMethod(ShippingMethod shippingMethod) {
+        this.shippingMethod = shippingMethod;
+    }
+
+    public ShippingStatus getShippingStatus() {
+        return shippingStatus;
+    }
+
+    public void setShippingStatus(ShippingStatus shippingStatus) {
+        this.shippingStatus = shippingStatus;
     }
 
     public String getShippingId() {

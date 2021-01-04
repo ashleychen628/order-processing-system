@@ -33,12 +33,6 @@ import lombok.Data;
 )
 public class OrderDetails {
     @Id
-//    @GeneratedValue(generator = "order_id_generator")
-//    @SequenceGenerator(
-//            name = "order_id_generator",
-//            sequenceName = "order_id_sequence",
-//            initialValue = 1000
-//    )
     @JsonIgnore
     @Column(name = "order_number")
     private String orderNumber;

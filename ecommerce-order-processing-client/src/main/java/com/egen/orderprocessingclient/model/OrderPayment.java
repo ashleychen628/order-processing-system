@@ -20,12 +20,6 @@ import java.util.UUID;
 )
 public class OrderPayment {
     @Id
-//    @GeneratedValue(generator = "payment_id_generator")
-//    @SequenceGenerator(
-//            name = "payment_id_generator",
-//            sequenceName = "payment_id_sequence",
-//            initialValue = 10
-//    )
     @Column(name = "payment_id")
     private String paymentId;
 
