@@ -1,0 +1,16 @@
+POST http://localhost:9081/bulk-order-update
+
+Update Order Request #1
+
+{
+    "updateOrderDetails" : [
+        {
+            "orderNumber": "2c468ec5-8fac-42e8-9e4e-d30b09bf9c84",
+            "orderStatus": "DELIVERED"
+        },
+        {
+            "orderNumber": "aa5a0fd6-61cb-4cb2-9d2a-b518fb44f197",
+            "orderStatus": "DECLINED"
+        }
+    ]
+}

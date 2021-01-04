@@ -1,0 +1,6 @@
+POST http://localhost:8081/updateOrderStatus
+
+{
+    "orderNumber": "61314b40-7cd8-4048-bc3b-d28edcaca7de",
+    "orderStatus": "DELIVERED"
+}

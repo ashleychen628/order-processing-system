@@ -1,0 +1,96 @@
+POST http://localhost:9081/bulk-order-create
+
+Request #1
+
+{
+    "orderDetails" : [
+        {
+            "orderSubtotal": 36.0,
+            "orderTax": 1.0,
+            "orderTotal": 47.0,
+            "shipping": {
+                "shippingMethod": "STORE_PICKUP",
+                "cost": 10.0,
+                "addressLine1": "Line1",
+                "addressLine2": "Line2",
+                "city": "KOP",
+                "state": "PA",
+                "zip": 19046
+            },
+            "customer": {
+                "customerId": 1001
+            },
+            "items": [
+                {
+                    "itemName": "Pant",
+                    "itemPrice": 12.0,
+                    "quantity": 2
+                },
+                {
+                    "itemName": "dress",
+                    "itemPrice": 12.0,
+                    "quantity": 1
+                }
+            ],
+            "payments": [
+                {
+                    "paymentAmount": 35.0,
+                    "paymentMethod": "DEBIT",
+                    "paymentType": {
+                        "billingAddress": {
+                        "addressLine1": "234 Henderson Rd",
+                        "addressLine2": "Apt D4",
+                        "city": "Philadelhpia",
+                        "state": "PA",
+                        "zip": 194011
+                    }
+                    }
+                }
+            ]
+        },
+        {
+            "orderSubtotal": 36.0,
+            "orderTax": 1.0,
+            "orderTotal": 47.0,
+            "shipping": {
+                "shippingMethod": "STORE_PICKUP",
+                "cost": 10.0,
+                "addressLine1": "Line1",
+                "addressLine2": "Line2",
+                "city": "KOP",
+                "state": "PA",
+                "zip": 19046
+            },
+            "customer": {
+                "customerId": 1001
+            },
+            "items": [
+                {
+                    "itemName": "Pant",
+                    "itemPrice": 12.0,
+                    "quantity": 2
+                },
+                {
+                    "itemName": "dress",
+                    "itemPrice": 12.0,
+                    "quantity": 1
+                }
+            ],
+            "payments": [
+                {
+                    "paymentAmount": 35.0,
+                    "paymentMethod": "DEBIT",
+                    "paymentType": {
+                        "billingAddress": {
+                        "addressLine1": "234 Henderson Rd",
+                        "addressLine2": "Apt D4",
+                        "city": "Philadelhpia",
+                        "state": "PA",
+                        "zip": 194011
+                    }
+                    }
+                }
+            ]
+        }
+    ]
+}

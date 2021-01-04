@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+    ecommerce-discovery-processing:
+      build:
+        context: ./ecommerce-discovery-service
+        dockerfile: Dockerfile
+      ports:
+        - 8761:8761
+
+    ecommerce-customer-processing:
+      build:
+        context: ./ecommerce-customer-processing
+        dockerfile: ./Dockerfile
+      ports:
+        - 8082:8082
+      depends_on:
+      - postgresql
+      environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/ecommerce_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=egensolutions
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+    ecommerce-payment-processing:
+      build:
+        context: ./ecommerce-payment-processing
+        dockerfile: ./Dockerfile
+      ports:
+        - 8083:8083
+      depends_on:
+        - postgresql
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/ecommerce_db
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=egensolutions
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+          
+    ecommerce-order-processing:
+      build:
+        context: ./ecommerce-order-processing-client
+        dockerfile: ./Dockerfile
+      ports:
+        - 8081:8081
+      depends_on:
+        - postgresql
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/ecommerce_db
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=egensolutions
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+          
+    order-processing-bulk-operations:
+      build:
+        context: ./order-processing-bulk-operations
+        dockerfile: ./Dockerfile
+      ports:
+        - 9081:9081
+      depends_on:
+        - postgresql
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/ecommerce_db
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=egensolutions
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update      
+          
+    postgresql:
+      container_name: postgresql
+      image: postgres:alpine
+      environment:
+        POSTGRES_DB: ecommerce_db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: egensolutions

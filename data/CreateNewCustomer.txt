@@ -1,0 +1,134 @@
+POST http://localhost:8082/createNewCustomer
+Cusomter #1
+
+{
+   "customer":{
+      "firstName":"John",
+      "lastName":"Doe",
+      "email":"jdoe@gmail.com",
+      "phone":"234-445-6677",
+      "payments":[
+         {
+            "type":"DEBIT",
+            "cardNumber":"2345 5554 3345 3345",
+            "cvv":123,
+            "expiryMonth":12,
+            "expiryYear":2022,
+            "billingAddress":{
+               "addressLine1":"234 Henderson Rd",
+               "addressLine2":"Apt D4",
+               "city":"Philadelhpia",
+               "state":"PA",
+               "zip":"19401"
+            }
+         },
+         {
+            "type":"CREDIT",
+            "cardNumber":"2311 1111 3311 4399",
+            "cvv":111,
+            "expiryMonth":11,
+            "expiryYear":2025,
+            "billingAddress":{
+               "addressLine1":"234 Henderson Rd",
+               "addressLine2":"Apt D4",
+               "city":"Philadelhpia",
+               "state":"PA",
+               "zip":"19401"
+            }
+         }
+      ]
+   }
+}
+
+Customer# 2
+
+{
+   "customer":{
+      "firstName":"Edward",
+      "lastName":"Luis",
+      "email":"eluis@gmail.com",
+      "phone":"456-445-4567",
+      "payments":[
+         {
+            "type":"DEBIT",
+            "cardNumber":"3454 3476 3345 3421",
+            "cvv":998,
+            "expiryMonth":9,
+            "expiryYear":2025,
+            "billingAddress":{
+               "addressLine1":"489 Radison Rd",
+               "addressLine2":"Suite A234",
+               "city":"King of Prussia",
+               "state":"PA",
+               "zip":"19406"
+            }
+         },
+         {
+            "type":"CREDIT",
+            "cardNumber":"3343 1111 2223 8879",
+            "cvv":111,
+            "expiryMonth":11,
+            "expiryYear":2025,
+            "billingAddress":{
+               "addressLine1":"489 Radison Rd",
+               "addressLine2":"Suite A234",
+               "city":"King of Prussia",
+               "state":"PA",
+               "zip":"19406"
+            }
+         }
+      ]
+   }
+}
+
+Customer# 3
+
+{
+   "customer":{
+      "firstName":"Maria",
+      "lastName":"Jones",
+      "email":"mjones@gmail.com",
+      "phone":"456-221-1123",
+      "payments":[
+          {
+            "type":"GIFTCARD",
+            "cardNumber":"3343 2222 1111 3333",
+            "cvv":998,
+            "expiryMonth":11,
+            "expiryYear":2026,
+            "billingAddress":{
+               "addressLine1":"123 Madison Rd",
+               "city":"Chicago",
+               "state":"IL",
+               "zip":"19412"
+            }
+         },
+         {
+            "type":"DEBIT",
+            "cardNumber":"4111 3312 4432 4456",
+            "cvv":123,
+            "expiryMonth":9,
+            "expiryYear":2025,
+            "billingAddress":{
+               "addressLine1":"123 Madison Rd",
+               "city":"Chicago",
+               "state":"IL",
+               "zip":"19412"
+            }
+         },
+         {
+            "type":"CREDIT",
+            "cardNumber":"3343 1111 2223 1278",
+            "cvv":111,
+            "expiryMonth":11,
+            "expiryYear":2025,
+            "billingAddress":{
+               "addressLine1":"123 Madison Rd",
+               "city":"Chicago",
+               "state":"IL",
+               "zip":"19412"
+            }
+         }
+      ]
+   }
+}

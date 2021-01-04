@@ -1,0 +1,141 @@
+POST http://localhost:8081/createOrder
+
+Order# 1
+
+{
+    "orderSubtotal": 36.0,
+    "orderTax": 1.0,
+    "orderTotal": 47.0,
+    "shipping": {
+        "shippingMethod": "STORE_PICKUP",
+        "cost": 10.0,
+        "addressLine1": "Line1",
+        "addressLine2": "Line2",
+        "city": "KOP",
+        "state": "PA",
+        "zip": 19046
+    },
+    "customer": {
+        "customerId": 1000
+    },
+    "items": [
+        {
+            "itemName": "Pant",
+            "itemPrice": 12.0,
+            "quantity": 2
+        },
+        {
+            "itemName": "dress",
+            "itemPrice": 12.0,
+            "quantity": 1
+        }
+    ],
+    "payments": [
+        {
+            "paymentAmount": 35.0,
+            "paymentMethod": "DEBIT",
+            "paymentType": {
+                "billingAddress": {
+                "addressLine1": "234 Henderson Rd",
+                "addressLine2": "Apt D4",
+                "city": "Philadelhpia",
+                "state": "PA",
+                "zip": 194011
+            }
+            }
+        }
+    ]
+}
+
+Order# 2
+
+{
+   "orderSubtotal":36.0,
+   "orderTax":1.0,
+   "orderTotal":47.0,
+   "shipping":{
+      "shippingMethod":"STORE_PICKUP",
+      "cost":10.0,
+      "addressLine1":"Line1",
+      "addressLine2":"Line2",
+      "city":"KOP",
+      "state":"PA",
+      "zip":19046
+   },
+   "customer":{
+      "customerId":1001
+   },
+   "items":[
+      {
+         "itemName":"Pant",
+         "itemPrice":12.0,
+         "quantity":2
+      },
+      {
+         "itemName":"dress",
+         "itemPrice":12.0,
+         "quantity":1
+      }
+   ],
+   "payments":[
+      {
+         "paymentAmount":35.0,
+         "paymentMethod":"CREDIT",
+         "paymentType":{
+            "billingAddress":{
+               "addressLine1":"489 Radison Rd",
+               "addressLine2":"Suite A234",
+               "city":"King of Prussia",
+               "state":"PA",
+               "zip":"19406"
+            }
+         }
+      }
+   ]
+}
+
+Order# 3
+
+{
+   "orderSubtotal":36.0,
+   "orderTax":1.0,
+   "orderTotal":47.0,
+   "shipping":{
+      "shippingMethod":"STORE_PICKUP",
+      "cost":10.0,
+      "addressLine1":"Line1",
+      "addressLine2":"Line2",
+      "city":"KOP",
+      "state":"PA",
+      "zip":19046
+   },
+   "customer":{
+      "customerId":1002
+   },
+   "items":[
+      {
+         "itemName":"Pant",
+         "itemPrice":12.0,
+         "quantity":2
+      },
+      {
+         "itemName":"dress",
+         "itemPrice":12.0,
+         "quantity":1
+      }
+   ],
+   "payments":[
+      {
+         "paymentAmount":35.0,
+         "paymentMethod":"DEBIT",
+         "paymentType":{
+            "billingAddress":{
+               "addressLine1":"123 Madison Rd",
+               "city":"Chicago",
+               "state":"IL",
+               "zip":"19412"
+            }
+         }
+      }
+   ]
+}
