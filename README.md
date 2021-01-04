@@ -27,18 +27,18 @@ This service is developed to add new customers and also provides and API like '/
 
     API's:
     
-     /createNewCustomer -> POST api to create new customer. Customer request consists of customer details, payment details and billing details. Sample json data in /data/CreateNewCustomer.txt
+     **/createNewCustomer** -> POST api to create new customer. Customer request consists of customer details, payment details and billing details. Sample json data in /data/CreateNewCustomer.txt
      
-     /getCustomer/{customerId} -> GET api to get customer details.
+     **/getCustomer/{customerId}** -> GET api to get customer details.
      
-     /isRegisteredCustomer/{customerId} -> GET api which is used by order-processing services using discovery services(no hardcoded url's)
+     **/isRegisteredCustomer/{customerId}** -> GET api which is used by order-processing services using discovery services(no hardcoded url's)
 
 3. ecommerce-payment-processing
 This service is developed to get payment details of customer like card details and billing address associated with payment card.
 
     API's:
     
-    getCustomerPayment/{customerId} -> GET api call used by order-processing system to check/validate payment details and billing address 
+    **getCustomerPayment/{customerId}** -> GET api call used by order-processing system to check/validate payment details and billing address 
     provided in the order request with existing payment details and billing address for the existing customer.
 
 4. ecommerce-order-processing-client
@@ -47,17 +47,17 @@ customer-processing and payment-processing system in order to communicate with e
 
     API's:
     
-    /createOrder -> POST api which is used to create order. As soon as request is sent, the order-processing system makes api's call internally to customer processing system to check
+    **/createOrder** -> POST api which is used to create order. As soon as request is sent, the order-processing system makes api's call internally to customer processing system to check
     if customerId present in the request is of existing customer or not. If api returns true then it proceeds and make another api call to payment micro-service to match the payment details
     like card type and billing address details of the one present in the request with existing customer records.
     
-    /getOrder/{orderNumber} -> GET api call to get the order details by providing order number in the api url.
+    **/getOrder/{orderNumber}** -> GET api call to get the order details by providing order number in the api url.
     
-    /cancelOrder/{orderNumber} -> PUT api call to change the status of existing order to CANCELLED. Order number is sent in the api url.
+    **/cancelOrder/{orderNumber}** -> PUT api call to change the status of existing order to CANCELLED. Order number is sent in the api url.
     
-    /updateOrderStatus -> PUT api call to update the order status as provided in the request body.
+    **/updateOrderStatus** -> PUT api call to update the order status as provided in the request body.
     
-    /getOrderByCustomerIDAndOrderID/{customerId}/{orderNumber} -> GET api call to get the order details of the given customer and given order id.
+    **/getOrderByCustomerIDAndOrderID/{customerId}/{orderNumber}** -> GET api call to get the order details of the given customer and given order id.
 
 5. order-processing-bulk-operations
 This is the service developed for internal clients like POS Terminals, fulfilment systems, warehouse picking systems etc. This service exposes 2 api calls which allows
@@ -66,9 +66,9 @@ which later will be consumed by bulk-create batch job and bulk-update batch job 
 
     API's:
     
-    /bulk-order-create -> POST api which takes list of order details and published message to kafka topic.
+    **/bulk-order-create** -> POST api which takes list of order details and published message to kafka topic.
     
-    /bulk-order-update -> POST api call which is used to udpate order status in bulk/batch. The request is the list of order number and statuses as shown in sample file. 
+    **/bulk-order-update** -> POST api call which is used to udpate order status in bulk/batch. The request is the list of order number and statuses as shown in sample file. 
 
 6. order-processing-bulk-create-async-batch-job
 This is the batch processing job which can be scheduled to trigger any number of times in a day by providing @Schedule parameters. This system is not scheduled
