@@ -57,17 +57,13 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public CreateOrderDetailsProcessor processor() {
-        return new CreateOrderDetailsProcessor();
-    }
-
-    @Bean
     Step start() {
         ItemWriter writer = new ItemWriter<String>() {
             @Override
             public void write(List<? extends String> orders)
                     throws Exception {
-                for (String order : orders) {
+
+                orders.stream().forEach(order -> {
                     Gson gson = new Gson();
                     CreateOrderRequest orderDetails = gson.fromJson(order, CreateOrderRequest.class);
                     OrderDetails processedOrderDetails = new OrderDetails();
@@ -97,7 +93,7 @@ public class BatchConfiguration {
                     Date currentDate = new Date();
                     processedOrderDetails.setCreatedDate(currentDate);
                     processedOrderDetails.setModifiedDate(currentDate);
-                    
+
                     List<OrderPaymentRequest> orderPayments = orderDetails.getPayments();
                     List<OrderPayment> orderPaymentList = new ArrayList<>(orderPayments.size());
                     int i = 0;
@@ -112,7 +108,7 @@ public class BatchConfiguration {
 
                     processedOrderDetails.setPayments(orderPaymentList);
                     respository.save(processedOrderDetails);
-                }
+                });
             }
         };
         return stepBuilderFactory.get("job")

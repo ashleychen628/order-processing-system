@@ -86,10 +86,15 @@ Requirements: Java 8, Install PostgreSQL, Install Apache Kafka 2.13.
 ** db user: postgres **
 
 ** db password: root **
-1. Create database named ecommerce_db in postgresql using command
+1. Create database named ecommerce_customer_db and ecommerce_db in postgresql using command
+    "create database ecommerce_customer_db;"
     "create database ecommerce_db;"
 
-2. Create the below ENUMs in PostgreSQL 'ecommerce_db' database using below commands:
+2. Create the below ENUMs in PostgreSQL 'ecommerce_customer_db' database using below commands:
+    
+    create type payment_method_info as enum('DEBIT', 'CREDIT','GIFTCARD');
+    
+   Create the below ENUMs in PostgreSQL 'ecommerce_db' database using below commands:
 
     create type shipping_status_info as enum('PICKUP', 'SHIPPED', 'CANCELLED','DELIVERED');
     
@@ -168,9 +173,20 @@ From command line:
 
     1. docker run --name postgres_db -p 5432:5432 -e POSTGRES_PASSWORD=root -d postgres
 
-    2. docker exec -it postgres_db psql -U postgres -P
+    2. docker exec -it postgres_db psql -U postgres
 
-    3. postgres=# create database ecommerce_db;
+    3. postgres=# create database ecommerce_customer_db;
+    postgres=# create database ecommerce_db;
+    Create type payment_method_info as enum('DEBIT', 'CREDIT','GIFTCARD'); in ecommerce_customer_db
+    
+    In ecommerce_db
+    create type shipping_status_info as enum('PICKUP', 'SHIPPED', 'CANCELLED','DELIVERED');
+        
+    create type order_status_info as enum('PLACED', 'SHIPPED','DECLINED', 'CANCELLED','DELIVERED');
+    
+    create type shipping_method_info as enum('STORE_PICKUP', 'CURBSIDE','DELIVERY');
+    
+    create type payment_method_info as enum('DEBIT', 'CREDIT','GIFTCARD');
 
     cd project parent dir (\egen-project-exercise)
     4. From dir:  ecommerce-discovery-service run below commands

@@ -24,7 +24,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "shipping_address")
+@Table(name = "order_shipping")
 @TypeDef(
         name = "pgsql_shipping_enum",
         typeClass = EnumTypePostgreSql.class

@@ -4,19 +4,17 @@ import com.egen.orderprocessingclient.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.egen.orderprocessingclient.model.CreateOrderRequest;
 import com.egen.orderprocessingclient.model.CustomerPaymentDetailsList;
 import com.egen.orderprocessingclient.model.OrderDetails;
-import com.egen.orderprocessingclient.service.OrderService;
+import com.egen.orderprocessingclient.service.OrderServiceImpl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 public class OrderDetailsController {
 
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -42,23 +40,30 @@ public class OrderDetailsController {
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @RequestMapping(method = RequestMethod.POST, value = "/createOrder", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDetails createOrder(@RequestBody CreateOrderRequest order) throws Exception, CustomerIdNotFoundException {
+    @RequestMapping(method = RequestMethod.POST, value = "/createOrder",
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderDetails createOrder(@RequestBody CreateOrderRequest order) throws Exception,
+            CustomerIdNotFoundException {
+
         long customerId = order.getCustomer().getCustomerId();
         boolean isRegisteredCustomer = restTemplate.getForObject("http://customer-processing-service/isRegisteredCustomer/" +
                 customerId, Boolean.class);
         boolean matchBillingAddress = false;
+
         if (isRegisteredCustomer) {
-            CustomerPaymentDetailsList registeredCustomerPayment = restTemplate.getForObject("http://payment-processing-service/getCustomerPayment/" +
+            CustomerPaymentDetailsList registeredCustomerPayment =
+                    restTemplate.getForObject("http://payment-processing-service/getCustomerPayment/" +
                     customerId, CustomerPaymentDetailsList.class);
             matchBillingAddress = orderService.verifyBillingAddress(order, registeredCustomerPayment);
         } else {
-            throw new CustomerIdNotFoundException(HttpStatus.NOT_FOUND, customerId + " is not found. Create Customer information.");
+            throw new CustomerIdNotFoundException(HttpStatus.NOT_FOUND, customerId
+                    + " is not found. Create Customer information.");
         }
         if (matchBillingAddress) {
             return orderService.createOrder(order);
         } else {
-            throw new BillingAddressNotMatchException(HttpStatus.NOT_ACCEPTABLE, "Billing Address is not matching with customer's billing address");
+            throw new BillingAddressNotMatchException(HttpStatus.NOT_ACCEPTABLE,
+                    "Billing Address is not matching with customer's billing address");
         }
     }
 
@@ -71,8 +76,10 @@ public class OrderDetailsController {
             @ApiResponse(code = 404, message = "Order number is not found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @RequestMapping(method = RequestMethod.GET, value = "/getOrder/{orderNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDetails getOrderById(@PathVariable("orderNumber") String orderNumber) throws OrderIdNotFoundException {
+    @RequestMapping(method = RequestMethod.GET, value = "/getOrder/{orderNumber}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderDetails getOrderById(@PathVariable("orderNumber") String orderNumber)
+            throws OrderIdNotFoundException {
         return orderService.getOrderById(orderNumber);
     }
 
@@ -84,8 +91,10 @@ public class OrderDetailsController {
             @ApiResponse(code = 404, message = "Order number is not found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @RequestMapping(method = RequestMethod.PUT, value = "/cancelOrder/{orderNumber}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDetails cancelOrderById(@PathVariable("orderNumber") String orderNumber) throws OrderIdNotFoundException {
+    @RequestMapping(method = RequestMethod.PUT, value = "/cancelOrder/{orderNumber}",
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderDetails cancelOrderById(@PathVariable("orderNumber") String orderNumber)
+            throws OrderIdNotFoundException {
         return orderService.cancelOrderById(orderNumber);
     }
 
@@ -97,8 +106,10 @@ public class OrderDetailsController {
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateOrderStatus", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDetails updateOrderStatus(@RequestBody OrderDetails orderDetails) throws OrderIdNotFoundException, EnumNotPresentException {
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateOrderStatus",
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderDetails updateOrderStatus(@RequestBody OrderDetails orderDetails)
+            throws OrderIdNotFoundException, EnumNotPresentException {
         return orderService.updateOrderStatus(orderDetails);
     }
 
@@ -111,8 +122,12 @@ public class OrderDetailsController {
             @ApiResponse(code = 404, message = "Order number is not found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @RequestMapping(method = RequestMethod.GET, value = "/getOrderByCustomerIDAndOrderID/{customerId}/{orderNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDetails getOrderByCustomerIDAndOrderID(@PathVariable long customerId, @PathVariable String orderNumber) throws OrderIdNotFoundException, NoMatchException, CustomerIdNotFoundException {
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/getOrderByCustomerIDAndOrderID/{customerId}/{orderNumber}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderDetails getOrderByCustomerIDAndOrderID(@PathVariable long customerId,
+                                                       @PathVariable String orderNumber)
+            throws OrderIdNotFoundException, NoMatchException, CustomerIdNotFoundException {
         return orderService.getOrderByCustomerIDAndOrderID(customerId, orderNumber);
     }
 }

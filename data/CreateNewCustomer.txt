@@ -17,7 +17,7 @@ Cusomter #1
             "billingAddress":{
                "addressLine1":"234 Henderson Rd",
                "addressLine2":"Apt D4",
-               "city":"Philadelhpia",
+               "city":"Philadelphia",
                "state":"PA",
                "zip":"19401"
             }
@@ -31,7 +31,7 @@ Cusomter #1
             "billingAddress":{
                "addressLine1":"234 Henderson Rd",
                "addressLine2":"Apt D4",
-               "city":"Philadelhpia",
+               "city":"Philadelphia",
                "state":"PA",
                "zip":"19401"
             }
@@ -127,6 +127,60 @@ Customer# 3
                "city":"Chicago",
                "state":"IL",
                "zip":"19412"
+            }
+         }
+      ]
+   }
+}
+
+#4
+
+
+   "customer":{
+      "firstName":"Kristin",
+      "lastName":"Jones",
+      "email":"Kristenjones@gmail.com",
+      "phone":"456-231-1123",
+      "payments":[
+          {
+            "type":"GIFTCARD",
+            "cardNumber":"3343 1111 1111 3333",
+            "cvv":908,
+            "expiryMonth":12,
+            "expiryYear":2021,
+            "billing": {
+               "addressLine1": "6 Sunbrook Parkway",
+               "addressLine2": "Johnson",
+               "city": "Washington",
+               "state": "District of Columbia",
+               "zip": 20397
+            }
+         },
+         {
+            "type":"DEBIT",
+            "cardNumber":"3390 3312 4432 4456",
+            "cvv":193,
+            "expiryMonth":8,
+            "expiryYear":2024,
+            "billingAddress":{
+               "addressLine1":"123 Madison Rd",
+               "city":"Chicago",
+               "state":"IL",
+               "zip":"19412"
+            }
+         },
+         {
+            "type":"CREDIT",
+            "cardNumber":"3343 1111 3432 1278",
+            "cvv":111,
+            "expiryMonth":11,
+            "expiryYear":2025,
+            "billing": {
+               "addressLine1": "03 Green Ridge Drive",
+               "addressLine2": "Steensland",
+               "city": "Oklahoma",
+               "state": "Oklahoma",
+               "zip": 73124
             }
          }
       ]

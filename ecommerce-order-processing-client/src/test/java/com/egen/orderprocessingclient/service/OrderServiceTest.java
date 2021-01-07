@@ -27,13 +27,13 @@ public class OrderServiceTest {
     @TestConfiguration
     static class OrderServiceTestConfiguration {
         @Bean
-        public OrderService getService() {
-            return new OrderService();
+        public OrderServiceImpl getService() {
+            return new OrderServiceImpl();
         }
     }
 
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderService;
 
     @MockBean
     private OrderRepository mockOrderRepository;
@@ -52,14 +52,16 @@ public class OrderServiceTest {
         orderItemList.add(orderItem1);
         orderItemList.add(orderItem2);
 
-        OrderPaymentRequest orderPaymentRequest = new OrderPaymentRequest("st234", 35, PaymentMethod.CREDIT);
+        OrderPaymentRequest orderPaymentRequest = new OrderPaymentRequest("st234",
+                35, PaymentMethod.CREDIT);
         List<OrderPaymentRequest> orderPaymentRequests = new ArrayList<>();
         orderPaymentRequests.add(orderPaymentRequest);
 
         shipping_address = new Shipping("345", ShippingMethod.STORE_PICKUP, 10,
                 "line1", "line2", "KOP", "PA", 12344);
 
-        orderDetails = new CreateOrderRequest(OrderStatus.PLACED, 36.0, 1.00, 47, shipping_address, new Customer(1002), orderItemList, orderPaymentRequests);
+        orderDetails = new CreateOrderRequest(OrderStatus.PLACED, 36.0, 1.00, 47,
+                shipping_address, new Customer(1002), orderItemList, orderPaymentRequests);
 
         orderDetailsTesting = new OrderDetails();
 
@@ -95,7 +97,8 @@ public class OrderServiceTest {
 
     @Test
     public void createOrderTest() {
-        Assert.assertEquals(orderDetailsTesting.getOrderStatus(), orderService.createOrder(orderDetails).getOrderStatus());
+        Assert.assertEquals(orderDetailsTesting.getOrderStatus(),
+                orderService.createOrder(orderDetails).getOrderStatus());
     }
 
     @Test
@@ -107,7 +110,8 @@ public class OrderServiceTest {
 
         Assert.assertEquals(orderDetailsTesting, orderService.getOrderById(orderNumber));
 
-        Assert.assertEquals(orderDetailsTesting.getOrderNumber(), orderService.getOrderById(orderNumber).getOrderNumber());
+        Assert.assertEquals(orderDetailsTesting.getOrderNumber(),
+                orderService.getOrderById(orderNumber).getOrderNumber());
     }
 
     @Test(expected = OrderIdNotFoundException.class)
@@ -143,7 +147,8 @@ public class OrderServiceTest {
     @Test
     public void getOrderByCustomerIDAndOrderIDTest() throws CustomerIdNotFoundException, NoMatchException {
         orderDetailsTesting.setOrderNumber("13");
-        Mockito.when(mockOrderRepository.findByCustomerIdAndOrderNumber(orderDetailsTesting.getCustomerId(), orderDetailsTesting.getOrderNumber()))
+        Mockito.when(mockOrderRepository.findByCustomerIdAndOrderNumber(orderDetailsTesting.getCustomerId(),
+                orderDetailsTesting.getOrderNumber()))
                 .thenReturn(Optional.of(orderDetailsTesting));
 
         String orderNumber = "13";

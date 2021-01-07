@@ -1,9 +1,9 @@
 package com.example.egen.orderprocessingbulkasync.configuration;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
-
+import com.example.egen.orderprocessingbulkasync.entity.OrderDetails;
+import com.example.egen.orderprocessingbulkasync.entity.UpdateOrderRequest;
+import com.example.egen.orderprocessingbulkasync.repository.OrderDetailsRepository;
+import com.google.gson.Gson;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -18,10 +18,9 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.egen.orderprocessingbulkasync.entity.OrderDetails;
-import com.example.egen.orderprocessingbulkasync.entity.UpdateOrderRequest;
-import com.example.egen.orderprocessingbulkasync.repository.OrderDetailsRepository;
-import com.google.gson.Gson;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
 
 @Configuration
 @EnableBatchProcessing
@@ -59,14 +58,16 @@ public class BatchConfiguration {
             @Override
             public void write(List<? extends String> orders)
                     throws Exception {
-                for (String order : orders) {
+
+                orders.stream().forEach(order -> {
                     Gson gson = new Gson();
                     UpdateOrderRequest updateOrderRequest = gson.fromJson(order, UpdateOrderRequest.class);
-                    Optional<OrderDetails> orderDetails = 
+                    Optional<OrderDetails> orderDetails =
                             respository.findByOrderNumber(updateOrderRequest.getOrderNumber());
                     orderDetails.ifPresent(details -> details.setOrderStatus(updateOrderRequest.getOrderStatus()));
                     respository.save(orderDetails.get());
-                }
+                });
+
             }
         };
         return stepBuilderFactory.get("job")
@@ -77,7 +78,7 @@ public class BatchConfiguration {
     }
 
     @Bean
-    Job job(NotificationListener listener, Step step1) {
+    Job job() {
         return jobBuilderFactory.get("BulkUpdateJob")
                 .incrementer(new RunIdIncrementer())
                 .start(start())

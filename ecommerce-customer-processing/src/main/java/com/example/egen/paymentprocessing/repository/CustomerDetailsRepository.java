@@ -1,10 +1,9 @@
 package com.example.egen.paymentprocessing.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.egen.paymentprocessing.model.Customer;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.egen.paymentprocessing.model.Customer;
-
 @Repository
-public interface CustomerDetailsRepository extends JpaRepository<Customer, Long> {
+public interface CustomerDetailsRepository extends CrudRepository<Customer, Long> {
 }

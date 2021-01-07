@@ -23,7 +23,7 @@ public class OrderPayment {
     @Column(name = "payment_id")
     private String paymentId;
 
-    @Column(name = "payment_confirmation_number")
+    @Column(name = "payment_confirmation_number", unique = true)
     private String paymentConfirmationNumber;
 
     @Column(name = "payment_amount")

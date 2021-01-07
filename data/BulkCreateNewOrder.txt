@@ -9,7 +9,7 @@ Request #1
             "orderTax": 1.0,
             "orderTotal": 47.0,
             "shipping": {
-                "shippingMethod": "STORE_PICKUP",
+                "shippingMethod": "DELIVERY",
                 "cost": 10.0,
                 "addressLine1": "Line1",
                 "addressLine2": "Line2",
@@ -18,7 +18,7 @@ Request #1
                 "zip": 19046
             },
             "customer": {
-                "customerId": 1001
+                "customerId": 1501
             },
             "items": [
                 {
@@ -34,7 +34,7 @@ Request #1
             ],
             "payments": [
                 {
-                    "paymentAmount": 35.0,
+                    "paymentAmount": 47.0,
                     "paymentMethod": "DEBIT",
                     "paymentType": {
                         "billingAddress": {
@@ -42,7 +42,7 @@ Request #1
                         "addressLine2": "Apt D4",
                         "city": "Philadelhpia",
                         "state": "PA",
-                        "zip": 194011
+                        "zip": 19401
                     }
                     }
                 }
@@ -54,7 +54,6 @@ Request #1
             "orderTotal": 47.0,
             "shipping": {
                 "shippingMethod": "STORE_PICKUP",
-                "cost": 10.0,
                 "addressLine1": "Line1",
                 "addressLine2": "Line2",
                 "city": "KOP",
@@ -62,7 +61,7 @@ Request #1
                 "zip": 19046
             },
             "customer": {
-                "customerId": 1001
+                "customerId": 1502
             },
             "items": [
                 {
@@ -78,7 +77,7 @@ Request #1
             ],
             "payments": [
                 {
-                    "paymentAmount": 35.0,
+                    "paymentAmount": 47.0,
                     "paymentMethod": "DEBIT",
                     "paymentType": {
                         "billingAddress": {
@@ -86,7 +85,7 @@ Request #1
                         "addressLine2": "Apt D4",
                         "city": "Philadelhpia",
                         "state": "PA",
-                        "zip": 194011
+                        "zip": 19401
                     }
                     }
                 }

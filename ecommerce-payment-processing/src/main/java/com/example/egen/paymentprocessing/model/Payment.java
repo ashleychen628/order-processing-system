@@ -34,7 +34,7 @@ public class Payment {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", unique = true)
     private String cardNumber;
 
     @Column(name = "cvv")

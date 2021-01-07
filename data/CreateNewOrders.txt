@@ -5,10 +5,9 @@ Order# 1
 {
     "orderSubtotal": 36.0,
     "orderTax": 1.0,
-    "orderTotal": 47.0,
+    "orderTotal": 37.0,
     "shipping": {
         "shippingMethod": "STORE_PICKUP",
-        "cost": 10.0,
         "addressLine1": "Line1",
         "addressLine2": "Line2",
         "city": "KOP",
@@ -16,7 +15,7 @@ Order# 1
         "zip": 19046
     },
     "customer": {
-        "customerId": 1000
+        "customerId": 1501
     },
     "items": [
         {
@@ -32,15 +31,15 @@ Order# 1
     ],
     "payments": [
         {
-            "paymentAmount": 35.0,
+            "paymentAmount": 37.0,
             "paymentMethod": "DEBIT",
             "paymentType": {
                 "billingAddress": {
                 "addressLine1": "234 Henderson Rd",
                 "addressLine2": "Apt D4",
-                "city": "Philadelhpia",
+                "city": "Philadelphia",
                 "state": "PA",
-                "zip": 194011
+                "zip": 19401
             }
             }
         }
@@ -50,12 +49,11 @@ Order# 1
 Order# 2
 
 {
-   "orderSubtotal":36.0,
+   "orderSubtotal":24.0,
    "orderTax":1.0,
-   "orderTotal":47.0,
+   "orderTotal":25.0,
    "shipping":{
       "shippingMethod":"STORE_PICKUP",
-      "cost":10.0,
       "addressLine1":"Line1",
       "addressLine2":"Line2",
       "city":"KOP",
@@ -63,23 +61,23 @@ Order# 2
       "zip":19046
    },
    "customer":{
-      "customerId":1001
+      "customerId":1502
    },
    "items":[
       {
-         "itemName":"Pant",
+         "itemName":"Blue color dress",
          "itemPrice":12.0,
-         "quantity":2
+         "quantity":1
       },
       {
-         "itemName":"dress",
+         "itemName":"Round collar dress",
          "itemPrice":12.0,
          "quantity":1
       }
    ],
    "payments":[
       {
-         "paymentAmount":35.0,
+         "paymentAmount":25.0,
          "paymentMethod":"CREDIT",
          "paymentType":{
             "billingAddress":{
@@ -97,11 +95,11 @@ Order# 2
 Order# 3
 
 {
-   "orderSubtotal":36.0,
+   "orderSubtotal":34.0,
    "orderTax":1.0,
-   "orderTotal":47.0,
+   "orderTotal":35.0,
    "shipping":{
-      "shippingMethod":"STORE_PICKUP",
+      "shippingMethod":"DELIVERY",
       "cost":10.0,
       "addressLine1":"Line1",
       "addressLine2":"Line2",
@@ -110,27 +108,28 @@ Order# 3
       "zip":19046
    },
    "customer":{
-      "customerId":1002
+      "customerId":1503
    },
    "items":[
       {
-         "itemName":"Pant",
+         "itemName":"Black Jeans",
          "itemPrice":12.0,
-         "quantity":2
+         "quantity":1
       },
       {
-         "itemName":"dress",
+         "itemName":"Pink top",
          "itemPrice":12.0,
          "quantity":1
       }
    ],
    "payments":[
       {
-         "paymentAmount":35.0,
+         "paymentAmount": 35.0,
          "paymentMethod":"DEBIT",
          "paymentType":{
             "billingAddress":{
                "addressLine1":"123 Madison Rd",
+               "addressLine2": "City Ave",
                "city":"Chicago",
                "state":"IL",
                "zip":"19412"

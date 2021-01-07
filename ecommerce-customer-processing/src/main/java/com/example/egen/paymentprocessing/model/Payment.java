@@ -46,7 +46,7 @@ public class Payment {
     @Type(type = "pgsql_shipping_enum")
     private PaymentMethod type;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", unique = true)
     private String cardNumber;
 
     @Column(name = "cvv")
