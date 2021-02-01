@@ -1,4 +1,4 @@
-# Egen Project Exercise : Ecommerce Order Processing
+# Ecommerce Order Processing
 
 ## Description
 Order processing system is developed following a micro-service architecture where order processing API's communicates with each other and other api's running on different machine.
