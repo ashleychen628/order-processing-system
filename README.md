@@ -188,7 +188,7 @@ From command line:
     
     create type payment_method_info as enum('DEBIT', 'CREDIT','GIFTCARD');
 
-    cd project parent dir (\egen-project-exercise)
+    cd project parent dir (\project-exercise)
     4. From dir:  ecommerce-discovery-service run below commands
         mvn install
         ./mvnw package && java -jar target/ecommerce-discovery-service-0.0.1-SNAPSHOT.jar
@@ -220,6 +220,6 @@ From command line:
         docker run -it -p9081:9081 order-processing-bulk-operations
 
     Above steps are to run each docker container individually. In order to run all containers together run below commands
-    From: Project parent dir (\egen-project-exercise)
+    From: Project parent dir (\project-exercise)
         docker-compose config
         docker-compose up
