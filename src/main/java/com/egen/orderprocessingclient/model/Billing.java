@@ -59,4 +59,18 @@ public class Billing {
         assert zip > 0 : "ZIP code must be a positive number";
         this.zip = zip;
     }
+
+    public static void main(String[] args) {
+      Billing billing = new Billing();
+    
+      billing.setAddressLine1("123 Main St");
+      billing.setCity("Springfield");
+      billing.setState("IL");
+      billing.setZip(62704);
+    
+      assert billing.getAddressLine1().equals("123 Main St");
+      assert billing.getCity().equals("Springfield");
+      assert billing.getState().equals("IL");
+      assert billing.getZip() == 62704;
+    }
 }

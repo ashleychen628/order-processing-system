@@ -5,6 +5,7 @@ import com.egen.orderprocessingclient.exception.NoMatchException;
 import com.egen.orderprocessingclient.exception.OrderIdNotFoundException;
 import com.egen.orderprocessingclient.model.*;
 import com.egen.orderprocessingclient.repository.OrderRepository;
+import com.egen.orderprocessingclient.repository.MockOrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@Service
 public class OrderServiceImpl implements OrderService{
-    @Autowired
-    private OrderRepository orderRepository;
+    private MockOrderRepository orderRepository;
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Transactional

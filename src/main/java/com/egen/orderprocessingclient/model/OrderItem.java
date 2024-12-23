@@ -34,6 +34,10 @@ public class OrderItem {
     }
 
     public OrderItem(String itemId, String itemName, double itemPrice, int quantity) {
+        assert itemId != null && !itemId.isEmpty() : "Item ID cannot be null or empty";
+        assert itemName != null && !itemName.isEmpty() : "Item name cannot be null or empty";
+        assert itemPrice >= 0 : "Item price must be non-negative";
+        assert quantity > 0 : "Quantity must be greater than zero";
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
@@ -45,6 +49,7 @@ public class OrderItem {
     }
 
     public void setItemId(String itemId) {
+        assert itemId != null && !itemId.isEmpty() : "Item ID cannot be null or empty";
         this.itemId = itemId;
     }
 
@@ -53,6 +58,7 @@ public class OrderItem {
     }
 
     public void setItemName(String itemName) {
+        assert itemName != null && !itemName.isEmpty() : "Item name cannot be null or empty";
         this.itemName = itemName;
     }
 
@@ -61,6 +67,7 @@ public class OrderItem {
     }
 
     public void setItemPrice(double itemPrice) {
+        assert itemPrice >= 0 : "Item price must be non-negative";
         this.itemPrice = itemPrice;
     }
 
@@ -69,6 +76,30 @@ public class OrderItem {
     }
 
     public void setQuantity(int quantity) {
+        assert quantity > 0 : "Quantity must be greater than zero";
         this.quantity = quantity;
     }
+
+    public static void main(String[] args) {
+      System.out.println("Verifying OrderItem assertions...");
+      
+      OrderItem item = new OrderItem("1", "Sample Item", 20.0, 5);
+
+      assert item.getItemId().equals("1") : "Item ID mismatch";
+      assert item.getItemName().equals("Sample Item") : "Item name mismatch";
+      assert item.getItemPrice() == 20.0 : "Item price mismatch";
+      assert item.getQuantity() == 5 : "Item quantity mismatch";
+
+      item.setItemPrice(15.0);
+      assert item.getItemPrice() == 15.0 : "Updated item price mismatch";
+  
+      item.setQuantity(10);
+      assert item.getQuantity() == 10 : "Updated quantity mismatch";
+  
+      item.setItemName("Updated Item");
+      assert item.getItemName().equals("Updated Item") : "Updated item name mismatch";
+  
+      System.out.println("All OrderItem assertions passed.");
+  }
+  
 }
