@@ -36,6 +36,56 @@ mvn spotbugs:check
 mvn spotbugs:gui
 ```
 ### Using JBMC
+All JBMC test code is in the JBMC folder. Run the jbmc command in the corresponding folder when testing.
+1. Customer processing
+Controller
+```
+jbmc CustomerDetailsTest --function CustomerDetailsTest.main --trace
+```
+2. Discovery Service
+```
+jbmc DiscoveryServiceTest --function DiscoveryServiceTest.main --trace
+```
+3. Order Processing
+- Controller
+```
+jbmc OrderDetailsControllerTest --function OrderDetailsControllerTest.main --trace
+```
+- Exception
+```
+jbmc BillingAddressValidator --function "BillingAddressValidator.testAddressValidation:(LBillingAddressValidator$Address;LBillingAddressValidator$Address;)Z" --trace
+```
+
+- Service (This section was tested separately for address validation, order status update, and order total calculation methods.)
+  - **Address Validation**  
+    ```bash
+    jbmc OrderService --function "OrderService.verifyAddress:(Ljava/lang/String;Ljava/lang/String;)Z" --trace
+    ```
+
+  - **Order Status Update**  
+    ```bash
+    jbmc OrderService --function "OrderService.updateOrderStatus:(LOrderService$Order;LOrderService$OrderStatus;)Z" --trace
+    ```
+
+  - **Order Calculation Methods**  
+    ```bash
+    jbmc OrderService.class --function "OrderService.calculateOrderTotal:(LOrderService$Order;)D" --trace
+    ```
+
+
+4. Payment
+- Exception
+```
+jbmc CustomerIdNotFoundExceptionTest
+```
+- Model
+```
+jbmc PaymentTest
+```
+- Service
+```
+jbmc PaymentServiceTest --function PaymentServiceTest.main
+```
 
 ## Description
 Order processing system is developed following a micro-service architecture where order processing API's communicates with each other and other api's running on different machine.
