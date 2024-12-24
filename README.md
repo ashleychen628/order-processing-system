@@ -1,5 +1,42 @@
 # Ecommerce Order Processing
 
+## Instruction On Running Verification Tools
+This section provides instructions for using SpotBugs and JBMC for code verification and analysis.
+### Using SpotBugs
+SpotBugs is a static analysis tool that helps in identifying bugs in Java code.
+1. **Installation**:
+- Make sure adding the Spotbugs plugin to your .xml file:
+```xml
+<plugin>
+    <groupId>com.github.spotbugs</groupId>
+    <artifactId>spotbugs-maven-plugin</artifactId>
+    <version>4.8.6.4</version>
+    <configuration>
+        <includeFilterFile>spotbugs-security-include.xml</includeFilterFile>
+        <excludeFilterFile>spotbugs-security-exclude.xml</excludeFilterFile>
+        <plugins>
+            <plugin>
+                <groupId>com.h3xstream.findsecbugs</groupId>
+                <artifactId>findsecbugs-plugin</artifactId>
+                <version>1.12.0</version>
+            </plugin>
+        </plugins>
+    </configuration>
+</plugin>
+```
+
+2. **Running SpotBugs**:
+- Use the folowing command to check the bugs:
+```bash
+mvn spotbugs:check
+```
+3. **Visualize the Results**:
+- You can use the gui command to see the results in GUI:
+```bash
+mvn spotbugs:gui
+```
+### Using JBMC
+
 ## Description
 Order processing system is developed following a micro-service architecture where order processing API's communicates with each other and other api's running on different machine.
 This system is developed using PostgreSQL database, Spring Boot, Spring Data JPA, Spring Cloud Netflix Eureka service registry, used Spring RESTfull micro-services, 
