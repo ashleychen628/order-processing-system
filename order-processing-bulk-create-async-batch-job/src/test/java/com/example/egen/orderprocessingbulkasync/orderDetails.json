@@ -1,0 +1,91 @@
+{
+  "orderDetails" : [
+      {
+          "orderSubtotal": 36.0,
+          "orderTax": 1.0,
+          "orderTotal": 47.0,
+          "shipping": {
+              "shippingMethod": "DELIVERY",
+              "cost": 10.0,
+              "addressLine1": "Line1",
+              "addressLine2": "Line2",
+              "city": "KOP",
+              "state": "PA",
+              "zip": 19046
+          },
+          "customer": {
+              "customerId": 1501
+          },
+          "items": [
+              {
+                  "itemName": "Pant",
+                  "itemPrice": 12.0,
+                  "quantity": 2
+              },
+              {
+                  "itemName": "dress",
+                  "itemPrice": 12.0,
+                  "quantity": 1
+              }
+          ],
+          "payments": [
+              {
+                  "paymentAmount": 47.0,
+                  "paymentMethod": "DEBIT",
+                  "paymentType": {
+                      "billingAddress": {
+                      "addressLine1": "234 Henderson Rd",
+                      "addressLine2": "Apt D4",
+                      "city": "Philadelhpia",
+                      "state": "PA",
+                      "zip": 19401
+                  }
+                  }
+              }
+          ]
+      },
+      {
+          "orderSubtotal": 36.0,
+          "orderTax": 1.0,
+          "orderTotal": 47.0,
+          "shipping": {
+              "shippingMethod": "STORE_PICKUP",
+              "addressLine1": "Line1",
+              "addressLine2": "Line2",
+              "city": "KOP",
+              "state": "PA",
+              "zip": 19046
+          },
+          "customer": {
+              "customerId": 1502
+          },
+          "items": [
+              {
+                  "itemName": "Pant",
+                  "itemPrice": 12.0,
+                  "quantity": 2
+              },
+              {
+                  "itemName": "dress",
+                  "itemPrice": 12.0,
+                  "quantity": 1
+              }
+          ],
+          "payments": [
+              {
+                  "paymentAmount": 47.0,
+                  "paymentMethod": "DEBIT",
+                  "paymentType": {
+                      "billingAddress": {
+                      "addressLine1": "234 Henderson Rd",
+                      "addressLine2": "Apt D4",
+                      "city": "Philadelhpia",
+                      "state": "PA",
+                      "zip": 19401
+                  }
+                  }
+              }
+          ]
+      }
+  ]
+}

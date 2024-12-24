@@ -1,0 +1,21 @@
+# Specify the target class to run
+target=com.example.egen.orderprocessingbulkasync.KafkaRaceConditionTest
+
+# Classpath to your compiled test classes
+classpath=/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/target/test-classes
+
+# :/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/gson-2.8.9.jar:/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/httpclient-4.5.13.jar:/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/httpcore-4.4.13.jar:/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/commons-codec-1.11.jar:/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/okhttp-3.14.9.jar:/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/okio-1.17.2.jar
+native_classpath=/Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/gson-2.8.9.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/httpclient-4.5.13.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/httpcore-4.4.13.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/commons-codec-1.11.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/okhttp-3.14.9.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE\ 6863\ Formal\ Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/okio-1.17.2.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE 6863 Formal Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/spring-beans-5.3.2.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE 6863 Formal Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/spring-context-5.3.2.jar,\
+                /Users/chendanyao/Documents/Columbia/CSEE 6863 Formal Verification/order-processing-system/order-processing-bulk-create-async-batch-job/lib/spring-core-5.3.2.jar
+# Enable the DeadlockAnalyzer to detect concurrency issues
+listener=gov.nasa.jpf.listener.DeadlockAnalyzer
+
+vm.no_orphan_check=true
+vm.no_dump=true
