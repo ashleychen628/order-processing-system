@@ -39,20 +39,20 @@ mvn spotbugs:gui
 All JBMC test code is in the JBMC folder. Run the jbmc command in the corresponding folder when testing.
 1. Customer processing
 Controller
-```
+```bash
 jbmc CustomerDetailsTest --function CustomerDetailsTest.main --trace
 ```
 2. Discovery Service
-```
+```bash
 jbmc DiscoveryServiceTest --function DiscoveryServiceTest.main --trace
 ```
 3. Order Processing
 - Controller
-```
+```bash
 jbmc OrderDetailsControllerTest --function OrderDetailsControllerTest.main --trace
 ```
 - Exception
-```
+```bash
 jbmc BillingAddressValidator --function "BillingAddressValidator.testAddressValidation:(LBillingAddressValidator$Address;LBillingAddressValidator$Address;)Z" --trace
 ```
 
@@ -69,21 +69,21 @@ jbmc BillingAddressValidator --function "BillingAddressValidator.testAddressVali
 
   - **Order Calculation Methods**  
     ```bash
-    jbmc OrderService.class --function "OrderService.calculateOrderTotal:(LOrderService$Order;)D" --trace
+    jbmc OrderService --function "OrderService.calculateOrderTotal:(LOrderService$Order;)D" --trace
     ```
 
 
 4. Payment
 - Exception
-```
+```bash
 jbmc CustomerIdNotFoundExceptionTest
 ```
 - Model
-```
+```bash
 jbmc PaymentTest
 ```
 - Service
-```
+```bash
 jbmc PaymentServiceTest --function PaymentServiceTest.main
 ```
 
