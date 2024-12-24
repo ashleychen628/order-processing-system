@@ -3,8 +3,8 @@ package com.egen.orderprocessingclient.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+// import org.hibernate.annotations.Type;
+// import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,10 +14,10 @@ import java.util.UUID;
 @ToString
 @Entity
 @Table(name = "order_payment")
-@TypeDef(
-        name = "pgsql_enum",
-        typeClass = EnumTypePostgreSql.class
-)
+// @TypeDef(
+//         name = "pgsql_enum",
+//         typeClass = EnumTypePostgreSql.class
+// )
 public class OrderPayment {
     @Id
     @Column(name = "payment_id")
@@ -31,7 +31,7 @@ public class OrderPayment {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "payment_method_info")
-    @Type(type = "pgsql_enum")
+    // @Type(type = "pgsql_enum")
     private PaymentMethod paymentMethod;
 
     public OrderPayment() {
@@ -43,6 +43,7 @@ public class OrderPayment {
     }
 
     public void setPaymentId(String paymentId) {
+        assert paymentId != null && !paymentId.isEmpty() : "Payment ID must not be null or empty";
         this.paymentId = paymentId;
     }
 
@@ -51,6 +52,7 @@ public class OrderPayment {
     }
 
     public void setPaymentConfirmationNumber(String paymentConfirmationNumber) {
+        assert paymentConfirmationNumber != null && !paymentConfirmationNumber.isEmpty() : "Payment confirmation number must not be null or empty";
         this.paymentConfirmationNumber = paymentConfirmationNumber;
     }
 
@@ -59,6 +61,7 @@ public class OrderPayment {
     }
 
     public void setPaymentAmount(double paymentAmount) {
+        assert paymentAmount >= 0 : "Payment amount must be non-negative";
         this.paymentAmount = paymentAmount;
     }
 
@@ -67,6 +70,47 @@ public class OrderPayment {
     }
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
+        assert paymentMethod != null : "Payment method must not be null";
         this.paymentMethod = paymentMethod;
     }
+
+    public static void main(String[] args) {
+      // Test Default Constructor
+      OrderPayment payment = new OrderPayment();
+      assert payment.getPaymentId() != null : "Payment ID should not be null";
+      assert payment.getPaymentId().length() == 36 : "Payment ID should be a valid UUID";
+
+      // Test setPaymentId
+      payment.setPaymentId("12345-uuid");
+      assert payment.getPaymentId().equals("12345-uuid") : "Payment ID mismatch";
+
+      try {
+          payment.setPaymentId(null);
+          assert false : "Payment ID should not be null";
+      } catch (AssertionError e) {
+          System.out.println("Caught expected error: " + e.getMessage());
+      }
+
+      // Test setPaymentConfirmationNumber
+      payment.setPaymentConfirmationNumber("CONFIRM123");
+      assert payment.getPaymentConfirmationNumber().equals("CONFIRM123") : "Payment confirmation number mismatch";
+
+      try {
+          payment.setPaymentConfirmationNumber("");
+          assert false : "Payment confirmation number should not be empty";
+      } catch (AssertionError e) {
+          System.out.println("Caught expected error: " + e.getMessage());
+      }
+
+      // Test setPaymentAmount
+      payment.setPaymentAmount(500.0);
+      assert payment.getPaymentAmount() == 500.0 : "Payment amount mismatch";
+
+      try {
+          payment.setPaymentAmount(-100.0);
+          assert false : "Payment amount should not be negative";
+      } catch (AssertionError e) {
+          System.out.println("Caught expected error: " + e.getMessage());
+      }
+  }
 }

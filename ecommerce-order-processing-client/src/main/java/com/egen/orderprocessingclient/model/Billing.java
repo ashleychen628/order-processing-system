@@ -21,6 +21,7 @@ public class Billing {
     }
 
     public void setAddressLine1(String addressLine1) {
+        assert addressLine1 != null && !addressLine1.isEmpty() : "Address Line 1 cannot be null or empty";
         this.addressLine1 = addressLine1;
     }
 
@@ -37,6 +38,7 @@ public class Billing {
     }
 
     public void setCity(String city) {
+        assert city != null && !city.isEmpty() : "City cannot be null or empty";
         this.city = city;
     }
 
@@ -45,6 +47,7 @@ public class Billing {
     }
 
     public void setState(String state) {
+        assert state != null && !state.isEmpty() : "State cannot be null or empty";
         this.state = state;
     }
 
@@ -53,6 +56,21 @@ public class Billing {
     }
 
     public void setZip(int zip) {
+        assert zip > 0 : "ZIP code must be a positive number";
         this.zip = zip;
+    }
+
+    public static void main(String[] args) {
+      Billing billing = new Billing();
+    
+      billing.setAddressLine1("123 Main St");
+      billing.setCity("Springfield");
+      billing.setState("IL");
+      billing.setZip(62704);
+    
+      assert billing.getAddressLine1().equals("123 Main St");
+      assert billing.getCity().equals("Springfield");
+      assert billing.getState().equals("IL");
+      assert billing.getZip() == 62704;
     }
 }
