@@ -10,10 +10,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+// import org.hibernate.annotations.Type;
+// import org.hibernate.annotations.TypeDef;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,10 +25,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "order_shipping")
-@TypeDef(
-        name = "pgsql_shipping_enum",
-        typeClass = EnumTypePostgreSql.class
-)
+// @TypeDef(
+//         name = "pgsql_shipping_enum",
+//         typeClass = EnumTypePostgreSql.class
+// )
 public class Shipping {
     @Id
     @Column(name = "shipping_id")
@@ -36,12 +36,12 @@ public class Shipping {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "shipping_method_info")
-    @Type(type = "pgsql_shipping_enum")
+    // @Type(type = "pgsql_shipping_enum")
     private ShippingMethod shippingMethod;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "shipping_status_info")
-    @Type(type = "pgsql_shipping_enum")
+    // @Type(type = "pgsql_shipping_enum")
     private ShippingStatus shippingStatus;
 
     @Column(name = "shipping_charge")
@@ -62,7 +62,7 @@ public class Shipping {
     @Column(name = "zip")
     private int zip;
 
-    @JsonIgnore
+    // @JsonIgnore
     @OneToOne(mappedBy = "shipping")
     private OrderDetails order;
 
@@ -85,6 +85,7 @@ public class Shipping {
     }
 
     public void setShippingMethod(ShippingMethod shippingMethod) {
+        assert shippingMethod != null : "Shipping method must not be null";
         this.shippingMethod = shippingMethod;
     }
 
@@ -93,6 +94,7 @@ public class Shipping {
     }
 
     public void setShippingStatus(ShippingStatus shippingStatus) {
+        assert shippingStatus != null : "Shipping status must not be null";
         this.shippingStatus = shippingStatus;
     }
 
@@ -101,6 +103,7 @@ public class Shipping {
     }
 
     public void setShippingId(String shippingId) {
+        assert shippingId != null && !shippingId.isEmpty() : "Shipping ID must not be null or empty";
         this.shippingId = shippingId;
     }
 
@@ -109,10 +112,12 @@ public class Shipping {
     }
 
     public void setCost(double cost) {
+        assert cost >= 0 : "Shipping cost must be non-negative";
         this.cost = cost;
     }
 
     public String getAddressLine1() {
+        assert addressLine1 != null && !addressLine1.isEmpty() : "Address Line 1 must not be null or empty";
         return addressLine1;
     }
 
@@ -133,6 +138,7 @@ public class Shipping {
     }
 
     public void setCity(String city) {
+        assert city != null && !city.isEmpty() : "City must not be null or empty";
         this.city = city;
     }
 
@@ -141,6 +147,7 @@ public class Shipping {
     }
 
     public void setState(String state) {
+        assert state != null && !state.isEmpty() : "State must not be null or empty";
         this.state = state;
     }
 
@@ -149,6 +156,7 @@ public class Shipping {
     }
 
     public void setZip(int zip) {
+        assert zip > 0 : "ZIP code must be a positive number";
         this.zip = zip;
     }
 
@@ -157,6 +165,41 @@ public class Shipping {
     }
 
     public void setOrder(OrderDetails order) {
+        assert order != null : "Order details must not be null";
         this.order = order;
     }
+
+    public static void main(String[] args) {
+      Shipping shipping = new Shipping();
+
+      // Test setCost
+      shipping.setCost(20.50);
+      assert shipping.getCost() == 20.50 : "Shipping cost mismatch";
+
+      try {
+          shipping.setCost(-5.00);
+          assert false : "Negative shipping cost should not be allowed";
+      } catch (AssertionError e) {
+          System.out.println("Caught expected error: " + e.getMessage());
+      }
+
+      // Test setShippingId
+      shipping.setShippingId("SHIP123");
+      assert shipping.getShippingId().equals("SHIP123") : "Shipping ID mismatch";
+
+      // Test setShippingMethod
+      shipping.setShippingMethod(ShippingMethod.STORE_PICKUP);
+      assert shipping.getShippingMethod() == ShippingMethod.STORE_PICKUP : "Shipping method mismatch";
+
+      // Test setZip
+      shipping.setZip(60616);
+      assert shipping.getZip() == 60616 : "ZIP code mismatch";
+
+      try {
+          shipping.setZip(-1);
+          assert false : "Negative ZIP code should not be allowed";
+      } catch (AssertionError e) {
+          System.out.println("Caught expected error: " + e.getMessage());
+      }
+  }
 }
