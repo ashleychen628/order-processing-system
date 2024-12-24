@@ -88,7 +88,8 @@ jbmc PaymentServiceTest --function PaymentServiceTest.main
 ```
 
 ### Using JBMC specifically to verify ecommerce-order-processing-client
-reference: https://www.cprover.org/jbmc/
+reference: https://www.cprover.org/jbmc/  
+The tests(assert) for ecommerce-order-processing-client are embedded inside the original code. There's no extra files
 #### Inside ecommerce-order-processing-client
 1. Compile the class file as follows
 ```
