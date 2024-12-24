@@ -87,6 +87,29 @@ jbmc PaymentTest
 jbmc PaymentServiceTest --function PaymentServiceTest.main
 ```
 
+### Using JBMC specifically to verify ecommerce-order-processing-client
+reference: https://www.cprover.org/jbmc/
+#### Inside ecommerce-order-processing-client
+1. Compile the class file as follows
+```
+$ pwd
+ECOMMERCE-ORDER-PROCESSING-CLIENT
+$ javac -cp <.jar files needed> -d out_jbmc -sourcepath main/java main/java/com/egen/orderprocessingclient/<model or service>/<classname>.java
+```
+This command creates a class file inside out_jbmc  
+For example:
+```
+$ javac -cp "lib/javax.persistence-api-2.2.jar:lib/lombok.jar:lib/slf4j-api-1.7.30.jar:lib/spring-beans-5.3.15.jar:lib/spring-context-5.3.15.jar:lib/spring-core-5.3.15.jar:lib/spring-data-jpa-2.7.15.jar:lib/spring-tx-5.3.15.jar:lib/spring-web-5.3.15.jar:lib/spring-orm-5.3.2.jar:lib/spring-jcl-5.3.2.jar" -d out_jbmc -sourcepath main/java main/java/com/egen/orderprocessingclient/service/OrderServiceImpl.java
+```
+  
+2. use JBMC to check for defects
+```
+$ pwd
+ECOMMERCE-ORDER-PROCESSING-CLIENT/src/out_jbmc
+$ <path-to-your-cmbc>/cbmc/jbmc/src/jbmc/jbmc com.egen.orderprocessingclient.<model or service>.<classname> --unwind 5
+```
+Needed .jar files are included in ECOMMERCE-ORDER-PROCESSING-CLIENT/src/lib  
+some .class files already exist in ECOMMERCE-ORDER-PROCESSING-CLIENT/src/out_jbmc/model and ECOMMERCE-ORDER-PROCESSING-CLIENT/src/out_jbmc/service, so you can skip step one.
 ## Description
 Order processing system is developed following a micro-service architecture where order processing API's communicates with each other and other api's running on different machine.
 This system is developed using PostgreSQL database, Spring Boot, Spring Data JPA, Spring Cloud Netflix Eureka service registry, used Spring RESTfull micro-services, 
