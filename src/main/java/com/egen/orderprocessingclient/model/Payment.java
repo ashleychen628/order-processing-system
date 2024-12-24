@@ -27,7 +27,8 @@ public class Payment {
       billing.setCity("Springfield");
       billing.setState("IL");
       billing.setZip(62704);
-      Payment payment = new Payment(billing);
+      Payment payment = new Payment();
+      payment.setBilling(billing);
       assert payment.getBilling() != null : "Billing address should not be null";
       assert payment.getBilling().getAddressLine1().equals("123 Main St") : "Billing address line mismatch";
       assert payment.getBilling().getCity().equals("Springfield") : "Billing city mismatch";

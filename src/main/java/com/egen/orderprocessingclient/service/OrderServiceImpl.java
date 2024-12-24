@@ -4,13 +4,13 @@ import com.egen.orderprocessingclient.exception.EnumNotPresentException;
 import com.egen.orderprocessingclient.exception.NoMatchException;
 import com.egen.orderprocessingclient.exception.OrderIdNotFoundException;
 import com.egen.orderprocessingclient.model.*;
-import com.egen.orderprocessingclient.repository.OrderRepository;
+
 import com.egen.orderprocessingclient.repository.MockOrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+// import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -191,5 +191,54 @@ public class OrderServiceImpl implements OrderService{
             }
         }
         return matchedAddress;
+    }
+
+    public static void main(String[] args) {
+      // Create an instance of OrderServiceImpl
+      OrderServiceImpl service = new OrderServiceImpl();
+
+      // Mock repository
+      service.orderRepository = new MockOrderRepository(); // Ensure MockOrderRepository has required methods
+
+      // Create a sample CreateOrderRequest
+      CreateOrderRequest orderRequest = new CreateOrderRequest();
+
+      // Set order items
+      OrderItem item1 = new OrderItem();
+      item1.setItemPrice(10.0);
+      item1.setQuantity(2);
+
+      OrderItem item2 = new OrderItem();
+      item2.setItemPrice(20.0);
+      item2.setQuantity(1);
+
+      List<OrderItem> items = new ArrayList<>();
+      items.add(item1);
+      items.add(item2);
+      orderRequest.setItems(items);
+
+      // Set shipping details
+      Shipping shipping = new Shipping();
+      shipping.setShippingMethod(ShippingMethod.STORE_PICKUP); // Adjust enums as necessary
+      shipping.setCost(5.0);
+      orderRequest.setShipping(shipping);
+
+      // Set payments
+      OrderPaymentRequest payment = new OrderPaymentRequest(
+          "CONF123", // Replace with a sample payment confirmation number
+          50.0,
+          PaymentMethod.CREDIT
+      );
+      List<OrderPaymentRequest> payments = new ArrayList<>();
+      payments.add(payment);
+      orderRequest.setPayments(payments);
+
+      // Verify the createOrder method
+      OrderDetails result = service.createOrder(orderRequest);
+
+      // Add assertions for JBMC verification
+      assert result != null : "OrderDetails should not be null";
+      assert result.getOrderTotal() == 50.0 : "Order total mismatch";
+      assert result.getOrderStatus() == OrderStatus.PLACED : "Order status mismatch";
     }
 }

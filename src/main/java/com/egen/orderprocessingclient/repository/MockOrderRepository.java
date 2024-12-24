@@ -5,35 +5,35 @@ import com.egen.orderprocessingclient.model.OrderDetails;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MockOrderRepository implements OrderRepository {
+public class MockOrderRepository {
     private final Map<String, OrderDetails> mockDatabase = new HashMap<>();
 
-    @Override
+    // @Override
     public Optional<OrderDetails> findByOrderNumber(String orderNumber) {
         return Optional.ofNullable(mockDatabase.get(orderNumber));
     }
 
-    @Override
+    // @Override
     public Optional<OrderDetails> findByCustomerIdAndOrderNumber(long customerId, String orderNumber) {
         return mockDatabase.values().stream()
                 .filter(order -> order.getCustomerId() == customerId && order.getOrderNumber().equals(orderNumber))
                 .findFirst();
     }
 
-    @Override
+    // @Override
     public List<OrderDetails> findByCustomerId(long customerId) {
         return mockDatabase.values().stream()
                 .filter(order -> order.getCustomerId() == customerId)
                 .collect(Collectors.toList());
     }
 
-    @Override
+    // @Override
     public <S extends OrderDetails> S save(S order) {
         mockDatabase.put(order.getOrderNumber(), order);
         return order;
     }
 
-    @Override
+    // @Override
     public <S extends OrderDetails> Iterable<S> saveAll(Iterable<S> entities) {
         List<S> savedEntities = new ArrayList<>();
         entities.forEach(entity -> {
@@ -44,22 +44,22 @@ public class MockOrderRepository implements OrderRepository {
     }
 
 
-    @Override
+    // @Override
     public Optional<OrderDetails> findById(String id) {
         return Optional.ofNullable(mockDatabase.get(id));
     }
 
-    @Override
+    // @Override
     public boolean existsById(String id) {
         return mockDatabase.containsKey(id);
     }
 
-    @Override
+    // @Override
     public Iterable<OrderDetails> findAll() {
         return mockDatabase.values();
     }
 
-    @Override
+    // @Override
     public Iterable<OrderDetails> findAllById(Iterable<String> ids) {
         List<OrderDetails> result = new ArrayList<>();
         ids.forEach(id -> {
@@ -70,27 +70,27 @@ public class MockOrderRepository implements OrderRepository {
         return result;
     }
 
-    @Override
+    // @Override
     public long count() {
         return mockDatabase.size();
     }
 
-    @Override
+    // @Override
     public void deleteById(String id) {
         mockDatabase.remove(id);
     }
 
-    @Override
+    // @Override
     public void delete(OrderDetails entity) {
         mockDatabase.remove(entity.getOrderNumber());
     }
 
-    @Override
+    // @Override
     public void deleteAll(Iterable<? extends OrderDetails> entities) {
         entities.forEach(entity -> mockDatabase.remove(entity.getOrderNumber()));
     }
 
-    @Override
+    // @Override
     public void deleteAll() {
         mockDatabase.clear();
     }
